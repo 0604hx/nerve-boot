@@ -1,0 +1,45 @@
+#loading-bar .bar {
+    background: white !important;
+    height: 4px;
+}
+#loading-bar-spinner .spinner-icon {
+    border-top-color: white !important;
+    border-left-color: white !important;
+}
+
+.simple-body #loading-bar .bar {
+    background: #367fa9 !important;
+    height: 4px;
+}
+.simple-body #loading-bar-spinner .spinner-icon {
+    border-top-color: #367fa9 !important;
+    border-left-color: #367fa9 !important;
+}
+
+html, body {font: 12px 'Microsoft YaHei';}
+body * {font-family:'Microsoft YaHei'}
+
+.divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.mt5 {margin-top: 5px;}
+.mt10 {margin-top: 10px;}
+.ml5 {margin-left: 5px;}
+.mr5 {margin-right: 5px;}
+.mb5 {margin-bottom: 5px;}
+/*贴近右边的下拉菜单*/
+.menu-right {left:auto !important; right:0px;}
+
+.table th {font-size:12px !important;}
+
+.noP {padding: 0px;}
+.noM {margin:0px;}
+.p2 {padding:2px;}
+.p4 {padding:4px}
+
+.label {font-weight: normal}
+.flat .label {border-radius: 0px;}
