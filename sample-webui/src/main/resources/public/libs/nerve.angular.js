@@ -224,6 +224,11 @@ var nerveApp = angular.module('nerveApp', [
             return value + (tail || ' …');
         };
     })
+    .filter('split', function() {
+        return function(input, splitChar, splitIndex) {
+            return input.split(splitChar)[splitIndex];
+        }
+    })
 ;
 nerveApp.directive('fileModel', ['$parse', function ($parse) {
     return {

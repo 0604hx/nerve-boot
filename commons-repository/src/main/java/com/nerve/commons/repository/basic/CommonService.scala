@@ -55,4 +55,8 @@ trait CommonService[T<:IdEntity,R<:CrudRepository[T,String]] {
     * @param value
     */
   def modifyField(id:String, field:String, value:String):Unit
+
+  def count:Long
+
+  def count(criteria: Criteria):Long
 }

@@ -81,6 +81,9 @@ angular.module("nerve.services")
         $scope.pageSize=function(){
             this.loadPage();
         }
+        $scope.showAttr=function(d,f){
+            N.alert(d[f]);
+        }
     }
     var _fixupPage=function($scope, total){
         $scope.page.total = total;

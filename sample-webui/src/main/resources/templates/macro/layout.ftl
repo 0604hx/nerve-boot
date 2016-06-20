@@ -258,7 +258,8 @@ multi 是否显示批量操作的按钮
             </#if>
         </div>
         <div class="col-xs-7">
-            <div class="pull-left">
+            <div class="">
+                共{{page.max}}页，
                 每页 <select ng-model="page.pageSize" ng-options="x.name as x.value for x in page.options" ng-change="pageSize()"></select> 条，
                 共 {{page.total}} 条记录
             </div>

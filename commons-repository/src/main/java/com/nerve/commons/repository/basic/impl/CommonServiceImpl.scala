@@ -3,13 +3,13 @@ package com.nerve.commons.repository.basic.impl
 import java.lang.reflect.Field
 import java.util
 
-import com.nerve.commons.repository.{IdEntity, TrashEntity, CommonRepository}
 import com.nerve.commons.repository.basic.CommonService
 import com.nerve.commons.repository.tools.Pagination
+import com.nerve.commons.repository.utils.reflection.MyBeanUtils
 import com.nerve.commons.repository.utils.{ConvertUtils, ReflectionUtils}
+import com.nerve.commons.repository.{CommonRepository, IdEntity, TrashEntity}
 import com.nerve.commons.tools.GenericItem
 import org.slf4j.{Logger, LoggerFactory}
-import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.query.{Criteria, Query}
 import org.springframework.data.repository.CrudRepository
@@ -95,7 +95,7 @@ class CommonServiceImpl[T<:IdEntity, R<:CrudRepository[T,String]] extends Generi
   override def save(t: T): Unit = {
     if(t.isUsed){
       val t2:T = repo.findOne(t.getId)
-      BeanUtils copyProperties (t, t2)
+      copyBean(t,t2)
       if(onBeforeSave(t2))
         repo save(t2)
     }else{
@@ -104,7 +104,18 @@ class CommonServiceImpl[T<:IdEntity, R<:CrudRepository[T,String]] extends Generi
     }
   }
 
+  protected def copyBean(fromB:T,toT:T)=MyBeanUtils copyBeanNotNull2Bean(fromB, toT)
+
   protected def idQuery(t:T): Query =return idQuery(t.getId)
 
   protected def idQuery(id:String)=new Query(Criteria.where("_id").is(id))
+
+  override def count: Long = repo.count()
+
+  override def count(criteria: Criteria): Long = {
+    if(repo.isInstanceOf[CommonRepository[T,String]])
+      return repo.asInstanceOf[CommonRepository[T,String]].count(criteria)
+    log.warn("please Use CommonRepository, because We need to call count(Criteria) method! Here will return -1.")
+    return -1;
+  }
 }
