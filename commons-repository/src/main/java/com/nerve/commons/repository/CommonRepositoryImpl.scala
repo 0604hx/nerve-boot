@@ -2,7 +2,7 @@ package com.nerve.commons.repository
 
 import java.util
 
-import com.mongodb.WriteResult
+import com.mongodb.{CommandResult, WriteResult}
 import com.nerve.commons.repository.tools.Pagination
 import org.springframework.data.domain.{Page, PageImpl, Pageable, Sort}
 import org.springframework.data.mongodb.core.MongoOperations
@@ -223,4 +223,12 @@ class CommonRepositoryImpl[T, ID<:java.io.Serializable](matedata:MongoEntityInfo
     val results=mongoOp.aggregate(aggregation, matedata.getJavaType, clazz)
     results.getMappedResults
   }
+
+  /**
+    * 获取表名
+    * @return
+    */
+  override def getCollectionName: String = matedata.getCollectionName
+
+  override def execCommand(json: String): CommandResult = mongoOp.executeCommand(json)
 }

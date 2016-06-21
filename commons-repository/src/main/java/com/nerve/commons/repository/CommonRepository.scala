@@ -1,7 +1,7 @@
 package com.nerve.commons.repository
 
 import java.util
-import com.mongodb.WriteResult
+import com.mongodb.{CommandResult, WriteResult}
 import com.nerve.commons.repository.tools.Pagination
 import org.springframework.data.domain.{Sort, Page, Pageable}
 import org.springframework.data.mongodb.core.aggregation.Aggregation
@@ -81,4 +81,12 @@ trait CommonRepository[T,ID<:java.io.Serializable] extends MongoRepository[T,ID]
     * @param aggregation
     */
   def aggregate[M<:java.lang.Object](aggregation: Aggregation,clazz:Class[M]):util.List[M]
+
+  /**
+    * 获取表名
+    * @return
+    */
+  def getCollectionName:String
+
+  def execCommand(json:String):CommandResult
 }
