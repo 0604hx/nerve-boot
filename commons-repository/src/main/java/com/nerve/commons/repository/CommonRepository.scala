@@ -89,4 +89,9 @@ trait CommonRepository[T,ID<:java.io.Serializable] extends MongoRepository[T,ID]
   def getCollectionName:String
 
   def execCommand(json:String):CommandResult
+
+  /**
+    * 获取表的状态信息：execCommand("{collstats:'colName'})
+    */
+  def getCollectionStats
 }

@@ -231,4 +231,9 @@ class CommonRepositoryImpl[T, ID<:java.io.Serializable](matedata:MongoEntityInfo
   override def getCollectionName: String = matedata.getCollectionName
 
   override def execCommand(json: String): CommandResult = mongoOp.executeCommand(json)
+
+  /**
+    * 获取表的状态信息：execCommand("{collstats:'colName'})
+    */
+  override def getCollectionStats= execCommand("{collstats:'"+getCollectionName+"'}")
 }
